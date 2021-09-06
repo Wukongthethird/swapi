@@ -22,16 +22,14 @@ interface peopleData {
 }
 
 const baseQuery = 
-  gql`query allPeople{
-    people{
-      name  
-      gender
-      weight
-      mass
+  gql`query {
+    allPeople{
+      people{
+        name  
+      }
     }
   }
   `
-
   
 function StarWars() {
 
@@ -50,9 +48,6 @@ function StarWars() {
     //   const toyGQL = `
     //   query allPeople{
     //     people{
-    //       name  
-    //       weight
-    //       mass
     //     }
     //   }
     // ` 
