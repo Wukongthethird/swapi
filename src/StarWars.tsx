@@ -40,7 +40,7 @@ function StarWars() {
 
   const {loading , error, data } = useQuery<people, peopleData>(baseQuery);
   
-
+  console.log( data)
   async function handleSearch(term: string) {
     // const response = await axios(`${BASE_URL}/${term}`);
     // const {results} = response.data;
@@ -56,13 +56,13 @@ function StarWars() {
 
     // setQueryString(toyGQL)
   }
-  console.log( baseQuery)
+
   return (
 
     <div>
    
       <Search handleSearch={handleSearch} />
-      {data}
+
       {/* <ul>
         {result.map(r => r.name
           ? <li>r.name</li> 
