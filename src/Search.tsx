@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 
-interface handleSearch {
-  (term: string): void;
+interface SearchProp {
+  handleSearch:  (term: string) => void;
 }
 
-function Search(callback: handleSearch) {
+function Search( props: SearchProp) {
   let initial: string = "";
   const [search, setSearch] = useState(initial);
 
-  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(evt: React.ChangeEvent<HTMLSelectElement>) {
     const { value } = evt.target;
     setSearch(value);
   }
 
   function handleSubmit(evt: React.FormEvent) {
     evt.preventDefault();
-    callback(search);
+    props.handleSearch(search);
     setSearch(initial);
   }
 
