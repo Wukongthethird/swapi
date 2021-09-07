@@ -5,10 +5,6 @@ import { gql, useQuery } from '@apollo/client';
 
 const BASE_URL = 'https://swapi.dev/api/';
 
-interface Data {
-  name: string,
-  title: string
-}
 
 interface people  {
   name:string,
@@ -19,6 +15,12 @@ interface people  {
 
 interface peopleData {
   people:people[]
+}
+
+interface Data {
+  // name: string,
+  // title: string
+  allPeople:peopleData
 }
 
 const baseQuery ={ 
@@ -40,19 +42,16 @@ const baseQuery ={
 }
 function StarWars() {
 
-  const [result, setresult] = useState<Data[]>([]);
+  // const [result, setresult] = useState<Data[]>([]);
   const [ queryString, setQueryString] = useState<string>("")
 
-  const {loading , error, data } = useQuery<people, peopleData>(  baseQuery["people"]  );
+  const {loading , error, data?Data } = useQuery<people, peopleData>(  baseQuery["people"]  );
   
-  console.log( 
-    data
-  )
   async function handleSearch(term: string) {
     setQueryString(term)
   }
   
-  if( loading === false ){ console.log( data) }
+  if( loading === false ){ console.log( data ) }
 
 
   return (
