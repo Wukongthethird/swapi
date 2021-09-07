@@ -21,40 +21,38 @@ interface peopleData {
   people:people[]
 }
 
-const baseQuery = 
-  gql`query {
+const baseQuery ={ 
+  people: gql`query {
     allPeople{
       people{
         name  
       }
     }
   }
-  `
-  
+  `,
+  films: gql`query{
+    allFilms{
+      films{
+        title
+      }
+    }
+  }`
+}
 function StarWars() {
 
   const [result, setresult] = useState<Data[]>([]);
   const [ queryString, setQueryString] = useState<string>("")
 
-  const {loading , error, data } = useQuery<people, peopleData>(baseQuery);
+  const {loading , error, data } = useQuery<people, peopleData>(  baseQuery["people"]  );
   
   console.log( 
-    loading, "ISLOADING\n",
     data
   )
   async function handleSearch(term: string) {
-    // const response = await axios(`${BASE_URL}/${term}`);
-    // const {results} = response.data;
-    //   const toyGQL = `
-    //   query allPeople{
-    //     people{
-    //     }
-    //   }
-    // ` 
-
-    // setQueryString(toyGQL)
+    setQueryString(term)
   }
-
+  
+  if( loading === false ){ console.log( data) }
 
 
   return (
@@ -63,11 +61,12 @@ function StarWars() {
    
       <Search handleSearch={handleSearch} />
 
-      {/* <ul>
-        {result.map(r => r.name
+      <ul>
+        {/* {result.map(r => r.name
           ? <li>r.name</li> 
-          : <li>r.title</li>)}
-      </ul> */}
+          : <li>r.title</li>)} */}
+          
+      </ul>
     </div>
   )
 }
