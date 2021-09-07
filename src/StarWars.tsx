@@ -9,7 +9,7 @@ const BASE_URL = 'https://swapi.dev/api/';
 interface people  {
   name:string,
   gender: string,
-  weight: number,
+  height: number,
   mass: number
 }
 
@@ -45,15 +45,16 @@ function StarWars() {
   // const [result, setresult] = useState<Data[]>([]);
   const [ queryString, setQueryString] = useState<string>("")
 
-  const {loading , error, data?Data } = useQuery<people, peopleData>(  baseQuery["people"]  );
+  const {loading , error, data } = useQuery<Data, peopleData>(  baseQuery["people"]  );
   
   async function handleSearch(term: string) {
     setQueryString(term)
   }
   
-  if( loading === false ){ console.log( data ) }
 
+  if (loading || error || !data) { return <div>Loading…</div> }
 
+  console.log(data?.allPeople?.people)
   return (
 
     <div>
@@ -61,6 +62,9 @@ function StarWars() {
       <Search handleSearch={handleSearch} />
 
       <ul>
+        {data?.allPeople?.people.map( p =>( <div>
+              {p?.name}: {p?.gender}, {p?.height}
+ </div>)) } 
         {/* {result.map(r => r.name
           ? <li>r.name</li> 
           : <li>r.title</li>)} */}
