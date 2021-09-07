@@ -28,6 +28,9 @@ const baseQuery ={
     allPeople{
       people{
         name  
+        gender
+        height
+        mass
       }
     }
   }
@@ -63,7 +66,7 @@ function StarWars() {
 
       <ul>
         {data?.allPeople?.people.map( p =>( <div>
-              {p?.name}: {p?.gender}, {p?.height}
+              {p?.name}: {p?.gender}, {p?.height} {p?.mass}
  </div>)) } 
         {/* {result.map(r => r.name
           ? <li>r.name</li> 
